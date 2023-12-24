@@ -56,8 +56,6 @@ router.post("/postContestDetails",async (req,res)=>{
                     else{
                         console.log("user with invalid handle no object found",element);
                     }
-
-                    
                 }
                 else{
                     let rollNumber = element['roll']
@@ -124,7 +122,6 @@ router.post("/postContestDetails",async (req,res)=>{
                         return true
                     })
                     let unsolvedProblemIds = allProblemIds.map((ele)=>ele.problemId._id);
-                    //console.log("u is ",allProblemIdsFromContest);
 
                     //adding user-contest details
                     let obj = {
@@ -206,16 +203,18 @@ router.post("/postContestDetails",async (req,res)=>{
         })
         res.send("successfully added");
 })
+
 async function getIndexOfProblemFromDiv(d, prbId){
     prbDivObj = await getData(problemDivModel, {problemId: prbId});
     let alldivs = prbDivObj[0]['divs']; 
     for (let index = d; index >= 0; index--) {
-        if(alldivs.includes(d)){
+        if(alldivs.includes(index)){
             return 1
         }
     }
     return 0;
 }
+
 async function getProblemIdsFromSlugs(problems){
     let problemIds = [];
     //console.log("problems is",problems,problems.length);
@@ -244,7 +243,6 @@ router.get("/getcontestDetails",async (req,res)=>{
     console.log("came inside");
     const batchObjs = await getData(batchModel, {batch:batch});
     const rollNumbers = batchObjs[0]["rollNumbers"]
-    //const rollNumbers = await getAllBeingZeroRollNumbers();
     console.log("collected rollNumbers", rollNumbers);
     for (let index = 0; index < rollNumbers.length; index++) {
         const roll = rollNumbers[index];

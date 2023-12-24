@@ -9,6 +9,7 @@ const contestProblemModel = require('../contestProblemModel');
 const userProblemModel = require('../userProblemModel');
 const handleModel = require('../handlesModel');
 const userContestModel = require('../userContestModel');
+const { route } = require('./batches');
 const router=express.Router()
 
 router.post("/postcontest",async (req,res)=>{
@@ -69,5 +70,11 @@ router.get("/getuserproblemcontestDetails", async(req,res)=>{
         usercontestObj:usercontestObj,
     });
 
+})
+
+router.get("/getAllStartersCode",async(req,res)=>{
+    let allcodes = await contestModel.find({}).select(({ "contestCode": 1, "_id": 0}));
+    console.log("allcodes are", allcodes);
+    res.send(allcodes);
 })
 module.exports= router;

@@ -16,6 +16,7 @@ const charRouter = require("./Routes/charts");
 const userProblem = require("./Routes/userProblem");
 const contestDataRouter = require("./Routes/addContestData");
 const problemRouter = require("./Routes/problem");
+const newContestRouter = require("./Routes/createContest");
 app.use(express.urlencoded({extended:true}));
 
 app.get("/",(req,res)=>{
@@ -27,6 +28,7 @@ app.use("/batch", batchRouter);
 app.use("/chart", charRouter);
 app.use("/userproblem",userProblem);
 app.use("/contestData", contestDataRouter);
+app.use("/newcontest", newContestRouter);
 
 app.listen("2000",()=>{
     console.log("port is listing to 2000");
